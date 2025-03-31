@@ -17,11 +17,11 @@ setInterval(function() {
         if (btnText.startsWith("Available")) {
           ready = true;
           reminder = 1;
-          nodeList[i].style.backgroundColor = "blue";
+          nodeList[i].style.backgroundColor = "#5E72E4";
         } else if (btnText.startsWith("Break")) {
           ready = true;
           reminder = 1;
-          nodeList[i].style.backgroundColor = "blue";
+          nodeList[i].style.backgroundColor = "#5E72E4";
         } else {
           ready = false;
         }
@@ -34,4 +34,4 @@ setInterval(function() {
     window.open(chrome.runtime.getURL("notready.wav"), "_blank");
   }
 
-}, 20000);
+}, 60000);
