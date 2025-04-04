@@ -1,7 +1,7 @@
 var reminder =1;
 
 setInterval(function() {
-  console.log("HarmonyReminder");
+  //console.log("HarmonyReminder");
   let ready = false;
 
   const nodeList = document.querySelectorAll("button[id='environment-selection']");
@@ -14,7 +14,7 @@ setInterval(function() {
   
         //Button text
         let btnText = nodeList[i].innerHTML.trim().toLowerCase();
-        console.log("Harmony button text: " + btnText);
+        //console.log("Harmony button text: " + btnText);
 
         if (btnText.startsWith("available")) {
           //Available
@@ -24,11 +24,11 @@ setInterval(function() {
         } else if (btnText.startsWith("break")) {
           //Break / Lunch
           let myDate = new Date();
-          console.log("Current time:" + myDate.getHours() + ":" + myDate.getMinutes());
+          //console.log("Current time:" + myDate.getHours() + ":" + myDate.getMinutes());
 
           //Lunch 12:30~13:30
-          if ((myDate.getHours() >=12 && myDate.getMinutes() >= 30) && (myDate.getHours() <= 13 && myDate.getMinutes() <= 30)) 
-          {
+          if ((myDate.getHours() ==12 && myDate.getMinutes() >= 30) 
+           || (myDate.getHours() == 13 && myDate.getMinutes() <= 30)) {
               ready = true;
               reminder = 1;
               nodeList[i].style.backgroundColor = "#5E72E4";
@@ -47,7 +47,9 @@ setInterval(function() {
             ready = false;
         }
       }
-    }  
+    }
+    
+    nodeList = null;
   }
 
   if (reminder < 10 && ready == false) {
