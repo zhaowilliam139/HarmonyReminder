@@ -48,8 +48,6 @@ setInterval(function() {
         }
       }
     }
-    
-    nodeList = null;
   }
 
   if (reminder < 10 && ready == false) {
