@@ -1,0 +1,34 @@
+{
+    "manifest_version": 3,
+    "name": "HarmonyReminder",
+    "version": "1.0.0",
+    "description": "Harmony Reminder",
+    "icons": {
+        "16": "icons/icon16.png"
+    },
+    "permissions": [
+      "activeTab",
+      "alarms",
+      "contextMenus",
+      "notifications",
+      "offscreen",
+      "scripting",
+      "storage"
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["audio/notready.wav"],
+        "matches": ["https://*/*"]
+      }
+	  ],
+    "content_scripts": [
+      {
+        "matches": ["https://mb.openmethodscloud.com/*"],
+        "js": ["content.js"],
+        "all_frames": true
+      }
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
+}
