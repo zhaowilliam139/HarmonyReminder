@@ -13,12 +13,9 @@ setInterval(function() {
   if (nodeList != null) {
     for (let i = 0; i < nodeList.length; i++) {
       if (nodeList[i].hasAttribute("_ngcontent-ng-c41150646")) {
-        //Found the button
-        nodeList[i].style.backgroundColor = "red";
-
         //Button text
         var btnText = nodeList[i].innerHTML.trim().toLowerCase();
-        //console.log("Harmony button text: " + btnText);
+        console.log("Harmony button innerHTML=" + nodeList[i].innerHTML + "; trim=" + btnText + ";");
 
         if (btnText.startsWith("available")) {
           //Available
@@ -28,13 +25,10 @@ setInterval(function() {
         } else if (btnText.startsWith("break")) {
           //Break / Lunch
           let myDate = new Date();
-          //console.log("Current time:" + myDate.getHours() + ":" + myDate.getMinutes());
 
           //Lunch 12:30~13:30
-          if (
-            (myDate.getHours() == 12 && myDate.getMinutes() >= 30) ||
-            (myDate.getHours() == 13 && myDate.getMinutes() <= 30)
-          ) {
+          if ( (myDate.getHours() == 12 && myDate.getMinutes() >= 30) ||
+            (myDate.getHours() == 13 && myDate.getMinutes() <= 30) ) {
             ready = true;
             reminder = 1;
             nodeList[i].style.backgroundColor = "#5E72E4";
@@ -51,12 +45,15 @@ setInterval(function() {
           nodeList[i].style.backgroundColor = "#5E72E4";
         } else {
           ready = false;
+          nodeList[i].style.backgroundColor = "red";
         }
       }
     }
   }
 
+  //console.log("Harmony ready=" + ready + ", reminder=" + reminder);
   if (ready == false) {
+    //显示桌面通知
     chrome.runtime.sendMessage({ type: "showNotification", message: btnText });
 
     //获取配置
@@ -65,9 +62,10 @@ setInterval(function() {
       muteAudio = response.data;
     });
 
-    if (reminder < 10 && ready == false) {
+    if (ready == false && reminder < 10) {
       reminder++;
       if (muteAudio == 0) {
+        //console.log("Harmony ready=" + ready + ", reminder=" + reminder + ", muteAudio=" + muteAudio);
         window.open(chrome.runtime.getURL("audio/notready.wav"), "_blank");
       }
     }
